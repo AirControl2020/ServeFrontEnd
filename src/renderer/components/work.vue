@@ -7,12 +7,12 @@
       <template>
         <v-data-table :headers="headers" :items="desserts" :items-per-page="5" class="elevation-1">
           <template v-slot:item.open="{ item }">
-            <v-btn @click="gj(item.roomid )" icon>
+            <v-btn @click="kj(item.roomid )" icon>
               <v-icon>mdi-history</v-icon>
             </v-btn>
           </template>
           <template v-slot:item.close="{ item }">
-            <v-btn @click="kj(item.roomid) " icon>
+            <v-btn @click="gj(item.roomid) " icon>
               <v-icon>mdi-history</v-icon>
             </v-btn>
           </template>
@@ -47,7 +47,7 @@
       </v-row>
       <v-btn color="primary" @click="gao">设置</v-btn>
     </div>
-    <div v-if="type==1">
+    <div v-if="type==2">
       <v-card-text>前台</v-card-text>
       <v-divider />
       <v-row>
@@ -84,7 +84,7 @@
         ></v-data-table>
       </template>
     </div>
-    <div v-if="type==1">
+    <div v-if="type==3">
       <v-card-text>经理</v-card-text>
       <v-divider />
       <v-row>
@@ -166,8 +166,7 @@ export default {
       { text: "费用", value: "price" },
       { text: "状态", value: "mode" },
       { text: "费率", value: "ratio" },
-      { text: "目标温度", value: "aimtemproture" },
-      { text: "是否处于调度中", value: "isdispatch" }
+      { text: "目标温度", value: "aimtemproture" }
     ],
     desserts3: []
   }),
@@ -190,6 +189,8 @@ export default {
       js["kind"] = 1;
       if (this.speed == "高") {
         js["speed"] = 3;
+      } else if (this.speed == "中") {
+        js["speed"] = 2;
       } else {
         js["speed"] = 1;
       }
@@ -208,7 +209,7 @@ export default {
           console.log(res);
         });
     },
-    kj(idx) {
+    gj(idx) {
       let js = {};
       js["room_id"] = idx;
       js["temp"] = -1;
@@ -225,7 +226,7 @@ export default {
           console.log(res);
         });
     },
-    gj(idx) {
+    kj(idx) {
       let js = {};
       js["room_id"] = idx;
       js["temp"] = -1;
@@ -243,6 +244,7 @@ export default {
         });
     },
     getPay() {
+      this.gj(this.roomid);
       let js = {};
       js["idx"] = this.roomid;
       js["when"] = this.picker + " " + this.picker2;
@@ -257,6 +259,9 @@ export default {
         });
     },
     getAnalyze() {
+      for (var i = 301; i <= 305; i++) {
+        this.gj(i);
+      }
       let js = {};
       js["idx"] = this.roomid;
       if (this.analyzeType == "年") {
