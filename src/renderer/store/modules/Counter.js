@@ -12,7 +12,7 @@ const getters = {
   },
   UserType(state) {
     if (state.token == "-1")
-      return 114514;
+      return 1;
     else
       return state.UserType;
   },
