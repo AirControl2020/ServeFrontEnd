@@ -1,5 +1,6 @@
 <template>
   <v-img :src="bg" height="100%" class="d-flex align-center">
+      <p class="display-3 d-flex justify-center">Air Condition Control Panel</p>
     <v-layout justify-center align-center fill-height>
       <v-flex xs12 sm6>
         <v-card outlined>
@@ -11,7 +12,6 @@
               type="password"
               :error-messages="status==2?error:''"
             />
-            {{radioGroup}}
             <v-radio-group v-model="radioGroup">
               <v-radio v-for="n in 3" :key="n" :label="tx[n]" :value="n"></v-radio>
             </v-radio-group>

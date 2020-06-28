@@ -101,7 +101,7 @@
         <v-select
           class="mx-4"
           v-model="analyzeType"
-          :items="items3"
+          :items="items33"
           label="报表模式"
           style="width: 125px"
         ></v-select>
@@ -122,7 +122,7 @@
 export default {
   data: () => ({
     analyzeType: "日",
-    items3: ["年", "月", "日"],
+    items33: ["年", "月", "日"],
     t: "null",
     picker: null,
     picker2: null,
